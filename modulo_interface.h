@@ -32,10 +32,10 @@ void mostrarEstadoPedido (int estado_pedido);
 
 int menuEstadoPedido (usuario **p_usuario_atual, pedido **pedido_usuario_atual); /*retorna o numero do pedido para analisar estado */
 
-void menuAlterarPreco (float **novo_preco); /*mostra lista de itens, pede pra digitar codigo do item e depois o novo preço. R
+float menuAlterarPreco (); /*mostra lista de itens, pede pra digitar codigo do item e depois o novo preço. R
 etorna o novo preço */
 
-void menuAlterarQtd (int *nova_quantidade);
+int menuAlterarQtd ();
 
 void menuAlterarDescricao (char **nova_descricao);
 

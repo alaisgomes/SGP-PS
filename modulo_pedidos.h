@@ -1,8 +1,8 @@
 /*Header contendo escopo de fuções, estruturas, defines ... referentes a pedidos.*/
 
-#include "modulo_item.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "modulo_itens.h"
 
 /*#######################################################*/
 /*#########Structs para manipulação de Pedidos###########*/
@@ -35,3 +35,9 @@ typedef struct estrutura_pedido{
 	float valor_total;		/*Valor total do pedido.*/
 
 }pedido;
+
+void alterarEstadoPedido (int processar, **posicao_pedido);
+void insereListaPedidos (/*rever parametros */);
+int consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
+
+
