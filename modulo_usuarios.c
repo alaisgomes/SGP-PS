@@ -8,148 +8,180 @@
  *
  ***/
 
+usuario *posicao_usuario;
 
 /*FUNCAO PARA USUARIO REALLIZAR SUAS ATIVIDADES */
 int tarefaUsuarios (int tipo_usuario, usuario *posicao_usuario) {
 
-	int operacao, codigo_item, continuar, numero_pedido, estado_pedido, codigo_item, tipo, tipoAlteracao;
-	float preco_item;
+	int operacao, codigo_item, continuar, numero_pedido, estado_pedido, codigo_item, tipoAlteracao;
+	int pedido_novo[60];
+	item novo_item, *p_item;
+	float preco_item, novo_preco;
+	usuario *p_usuario_atual;
+	char novo_cpf[12], novo_nome[50], nova_senha[6];
+
 	/*criar os ponteiros alternativos aqui */
 	
 	switch (tipo_usuario) {
 		case 0: /*comum*/
 			do{
-				operacao = menuComum (); /* funcao de login _USUARIO */
+				operacao = menuComum ();
 				switch (operacao) {
 					case 1: /*consltar precos */
 						do{
-							codigo_item = menuItem (); /*mostra itens e retorna  o codigo do item desejado_interface*/
-							preco_item = consultarPrecoItem (codigo_item); /*procura na lista de itens o preco dele _ITENS*/
-							continuar = mostrarPreco (preco_item); /*mostra o preco do item _INTERFACE*/
+							codigo_item = menuItem ();
+							preco_item = consultarPrecoItem (codigo_item);
+							mostrarPreco (preco_item);
+							continuar = funcaoContinuar ();
 						} while (continuar==1);
 					break;
-					case 2: /*fazer um pedido*/
+					case 2: /*fazer um pedido REVER*/
 						do {
-							menuInserirPedido (itens_pedido *p_itens_pedidos); /*passa pra inserir todos os itens desejados*/
-							continuar = funcaoContinuar();
+							menuInserirPedido (&novo_pedido);
+							/*inserirPedido (lista de itens aserem inseridos no pedido , ponteiro do usuario para insetir os pedidos); */
+							continuar = funcaoContinuar ();
+
 						} while (continuar ==1);
 					break;
+
 					case:3 /*consultar estado pedido*/
-					do {
-						numero_pedido = menuPedido (/*o ponteiro do usuario */, /*ponteirov do pedido*/); /*retorna o numero do pedido _INTERFACE*/
-						estado_pedido = consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido); 
-						mostrarEstadoPedido (estado_pedido); /*Mostrar pro usuario o estado do pedido dele e se ele desenja continuar a fazer isso */
-					} while (continuar ==1);
+						do {
+							numero_pedido = menuEstadoPedido (usuario **p_usuario_atual, pedido **pedido_usuario_atual);
+							estado_pedido = consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
+							mostrarEstadoPedido (estado_pedido);
+							continuar = funcaoContinuar ();
+						} while (continuar ==1);
 					break;
-			} while (operacao != 4); /*se for 4, automaticamente ja vai deslogar */		
-			break;
+					case 4:
+					break;
+				}
+			} while (operacao != 4); /*se for 4, automaticamente ja vai deslogar */
+		break;
 		case 1: /*adm*/
 			do {
 				operacao = menuAdm ();
 				switch (operacao);
-				
-				
-				/*quando fizer essas alteracoes do usuario eu faco aqui tbm 
-				 * ****************          ***************           ***************** */
-					case 1: /*consltar precos */
-						do{
-							codigo_item = menuItem (); /*mostra itens e retorna  o codigo do item desejado_interface*/
-							preco_item = consultarPrecoItem (codigo_item); /*procura na lista de itens o preco dele _ITENS*/
-							mostrarPreco (preco_item); /*mostra o preco do item _INTERFACE*/
-							continuar = funcaoContinuar ();
-						} while (continuar==1);
-					break;
-					case 2: /*fazer um pedido*/
-						do {
-							menuInserirPedido (/*dados a serem repassados para inserir no novo pedido _INTERFACE */);
-							inserirPedido (/*lista de itens aserem inseridos no pedido*/, /*ponteiro do usuario para insetir os pedidos*/); /*passa pra inserir todos os itens desejados_INTERFACE*/
-							continuar = funcaoContinuar ();
-							
-						} while (continuar ==1);
-					break;
-					
-					case:3 /*consultar estado pedido*/
+
+				case 1: /*consltar precos */
+					do{
+						codigo_item = menuItem ();
+						preco_item = consultarPrecoItem (codigo_item);
+						mostrarPreco (preco_item);
+						continuar = funcaoContinuar ();
+					} while (continuar==1);
+				break;
+				case 2: /*fazer um pedido REVER*/
 					do {
-						numero_pedido = menuPedido (/*o ponteiro do usuario */, /*ponteirov do pedido*/); /*retorna o numero do pedido _INTERFACE*/
-						estado_pedido = consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido); 
-						mostrarEstadoPedido (estado_pedido); /*_INTERFACE Mostrar pro usuario o estado do pedido dele e se ele desenja continuar a fazer isso */
+						menuInserirPedido (&novo_pedido);
+						/*inserirPedido (lista de itens aserem inseridos no pedido, ponteiro do usuario para insetir os pedidos); */
+						continuar = funcaoContinuar ();
+
+					} while (continuar ==1);
+				break;
+
+				case:3 /*consultar estado pedido*/
+					do {
+						numero_pedido = menuEstadoPedido (usuario **p_usuario_atual, pedido **pedido_usuario_atual);
+						estado_pedido = consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
+						mostrarEstadoPedido (estado_pedido);
 						continuar = funcaoContinuar ();
 					} while (continuar ==1);
-					break;
-					/*                                    ***************                      */
+				break;
+				case 4: /*alterar usuario */
+					do {
+						tipoAlteracao = menuAlterarUsuario (&plista_usuarios, &p_usuario_atual);
+						if (tipoAlteracao == 1) { /*alterar cpf */
+							insereCPF(&novo_cpf);
+							alterarCPF (novo_cpf, &p_usuario_atual);
+						} else if (tipoAlteracao == 2) {/*slterar senha */
+							insereSenha(&nova_senha);
+							alterarSenha (nova_senha, &p_usuario_atual);
+						} else if (tipoAlteracao ==3 ) { /*alterar nome */
+							insereNome(&novo_nome);
+							alterarNome (novo_nome, &p_usuario_atual);
+						} else if (tipoAlteracao==4) { /*excluir*/
+							deletarListaUsuarios (&p_usuario_atual, /&plista_usuarios);
+						}
+						continuar = funcaoContinuar ();
+					}while (continuar == 1);
+				break;
 					
-					
-					case 4: /*alterar usuario */
-						do {
-							tipoAlteracao = menuAlterarUsuario (/*lista de usuarios*/ , /*ponteiro do usuario que se deseja alterar _INTEFACE*/);
-							if (tipoAlteracao == 1) { /*alterar cpf */
-								mudarCPF (/*passar a string do novo CPF _INTERFACE*/);
-								alterarCPF (/*string novo CPF*/, /*ponteiro do usuario que se quer alterar _USUARIO */);
-							} else if (tipoAlteracao == 2) {/*slterar senha */
-								mudarSenha(/*string nova senha INTERFACE*/);
-								alterarSenha (/*string nova senha*/, /*ponteiro ddo usuario que se quer alterar*/);
-							} else if (tipoAlteracao ==3 ) { /*alterar nome */
-								mudarNome (/*string do novo nome */);
-								alterarNome (/*ponteiro do usuario*/, /*string novo nome*/);
-							} else if (tipoAlteracao==4) { /*excluir*/
-								deletarUsuario (/*ponteiro usuario*/, /*ponteiro da lista de usuarios*/);
-							}
-							continuar = funcaoContinuar ();
-						}while (continuar == 1);	
-					break;
-					
-					case 5: /*alterar produtos*/
-						do {
-							tipoAlteracao = menuAlterarProduto ();
-							switch (tipoAlteracao) {
-								case 1: /*adicionar novo item */
-									
-									novo_item = menuInserirItem ();
-									inserirNovoItem (novo_item, /*ponteiro da lista de itens*/); /* */
-								break;
+				case 5: /*alterar produtos*/
+					do {
+						tipoAlteracao = menuAlterarProduto ();
+						switch (tipoAlteracao) {
+							case 1: /*adicionar novo item */
+								novo_item = menuInserirItem ();
+								insereListaItens (novo_item); /* */
+							break;
 								
-								case 2: /*mudar preco */
-									codigo_item = menuAlterarPreco ();
+							case 2: /*mudar preco */
+								codigo_item = menuItem ();
+								novo_preco = menuAlterarPreco ();
+								apontaListaItens (codigo_item, &p_item);
+								alterarPrecoItem (novo_preco, &p_item);
+							break;
+							case 3: /*alrterar descricao */
+								codigo_item = menuItem();
+								menuAlterarDescricao (&nova_descricao);
+								apontaListaItens(codigo_item, &p_item);
+								alterarDescricaoitem(nova_descricao, &p_item);
+							break;
+							case 4: /*alterar qtd de um item no estoque */
+								codigo_item = menuItem();
+								menuAlterarQtd (&nova_quantidade);
+								apontaListaItens(codigo_item, &p_item);
+								alterarQtdItem (nova_quantidade, &p_item);
+							break;
+						}
+					} while (tipoAlteracao!=5);
+
 					break;
 			
 					case: 6 /*pedidos */
-						
-				} while (operacao != 7); /*diferente da opcao de deslogar */
+						do{
+							processar = processarPedido (&posicao_usuario, &posicao_pedido);
+							alterarEstadoPedido(processar, &posicao_pedido);
+							continuar = funcaoContinuar();
+						} while (continuar== 1);
+					break;
+
+			} while (operacao != 7); /*diferente da opcao de deslogar */
 		break;
-		return 0;
-		
 	}
+	return 0;
+}
 	
 	
 /*FUNCAO DE LOGIN DE USUARIO */
 int FazerLogin (char *cpf,  char *nome, char *senha) {
 	int senha_correta;
-	int tipo_usuario;
-	int tentar_login;
+	int usuario_existe, tipo_usuario;
 	
-	tipo_usuario = procurarUsuario (*cpf,posicao_usuario); /*chama funcao de procurar usuario passandoo o cpf e ao encontrar o cpf returna o ponteiro da posicao do usuario */
-	senha_correta = procurarSenha (*senha, **posicao_usuario); /*vai entrar na posicao do usuario e procurar na struct do usuario se a senha bate e retorna se sim ou se nao*/
-	if ((senha_correta==1)&&((tipo_usuario==1)||(tipo_usuario==0))){
-		/*tarefasUsuario (tipo_usuario); senha OK = chama funcao pra realizar tarefas*/
-		
+
+	apontaListaUsuario(&posicao_usuario);
+	usuario_existe = pesquisaListaUsuarios (&cpf);
+	senha_correta = procurarSenhaUsuario (*senha, &posicao_usuario);
+	if ((senha_correta==1)&&(usuario_existe==1)){
+		tipo_usuario = verificarTipoUsuario (posicao_usuario);
 		return (tipo_usuario); /*login ok, retorna tipo usuario fez tudo o que tinha que fazer e depois saiu */
 	} else {
-		return (-1); /*retornar -1m ppra caso a senha esteja errada e a interface tomar as  decisoes adequadas */
+		return (-1); /*retornar -1 pra caso a senha esteja errada e a interface tomar as  decisoes adequadas */
 	}
 }
 
-/*FUNCAO PARA CADASTRAR UM USUARIO */
+/*FUNCAO PARA CADASTRAR UM USUARIO
+ * FUNCAO OK
+ * */
 
 void cadastrarUsuario () {
-	char cpf[11], nome[50], senha [6];
-	int tipoUsuario;
 	usuario cadastro_usuario;
 	
-	insereCPF (cadastro_usuario.CPF);
-	insereNome(cadastro_usuario.nome);
-	insereSenha(cadastro_usuario.senha);
+	insereCPF (&cadastro_usuario.CPF);
+	insereNome(&cadastro_usuario.nome);
+	insereSenha(&cadastro_usuario.senha);
 	cadastro_usuario.tipo_acesso = escolheUsuario(); /*0 comum 1 adm*/
 
-	inserirUsuarioLista(&cadastro_usuario, &p_usuario);
+	insereListaUsuarios(&cadastro_usuario);
 }
 

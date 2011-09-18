@@ -33,10 +33,27 @@ typedef struct estrutura_usuario{
 
 }usuario;
 
+void alterarCPF (char *novo_cpf, usuario **p_usuario_atual);
+void alterarNome (char *novo_nome, usuario **p_usuario_atual);
+void alterarSenha (char *novo_senha, usuario **p_usuario_atual);
+
+void apontaListaUsuarios (usuario **p_usuario);
+void insereListaUsuarios(usuario *cadastro_usuario);
+int pesquisaListaUsuarios (char **cpf); /*retorna se o usuario existe ou nao */
+
+int verificaTipoUsuario (usuario **atual);
+
+
+int procurarSenhaUsuarios (char *senha); /*retorna se a seha existe ou nao */
+
+void deletarListaUsuarios (usuario *p_usurio_atual, usuario *plista_usuario); /*deleta usuario da lista de usuarios */
+
 int tarefaUsuarios (int tipo_usuario, usuario *posicao_usuario);
 
-int FazerLogin (char *cpf,  char *nome, char *senha);
+int FazerLogin (char *cpf,  char *nome, char *senha); /*retorna o tipo do usuario ou se o login nao foi possivel ser realizado (-1)*/
 
 void cadastrarUsuario ();
+
+void mostraListaUsuarios (usuario *plista_usuarios);
 
 
