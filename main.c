@@ -12,10 +12,10 @@ int main(){
 	item *p_item;
 	itens_pedido *p_itens_pedido;
 
-	p_pedido = malloc(sizeof(pedido));
-	p_usuario = malloc(sizeof(usuario));
+	/*p_pedido = malloc(sizeof(pedido));
+	plista_usuario = malloc(sizeof(usuario));
 	p_item = malloc(sizeof(item));
 	p_itens_pedido = malloc(sizeof(itens_pedido));
-
+	*/
 	return 0;
 }
