@@ -80,25 +80,18 @@ int menuComum(){
 	return(opcao);
 }
 
-<<<<<<< HEAD
-int menuItem() {
-=======
 int menuItem(){
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
+
 	int cod_item, achou, opcao=0;
-	mostrarListaDeItens(); /*estara no modulo_itens*/
+	mostrarListaItens(); /*estara no modulo_itens*/
 	do{
 		printf("Insira o codigo do item que você deseja");
 		scanf("%d",cod_item);
-<<<<<<< HEAD
+
 		achou = procuraListaItens(cod_item); /*estara na modulo_itens_modifiquei pro padrao*/
-		if (!achou){
-			printf("O item que voce selecionou não existe. Deseja fazer nova consulta?\n1. Sim\n2. Não\n\nInsira sua opção: ");
-=======
-		achou = procuraListaDeItens(cod_item); /*estara na modulo_itens*/
+
 		if (!achou){
 			printf("O item que voce selecionou não existe. Deseja fazer nova consulta?\n1. Sim\n2. Não\n\nInsira sua opção: "); 
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 			scanf("%d", &opcao);
 		}
 		else
@@ -113,15 +106,12 @@ int funcaoContinuar(){
 		printf("Deseja continuar realizando a operacao atual?n1. Sim\n2. Não\n\nInsira sua opção: ");
 		scanf("%d",&opcao);
 		if(opcao == 1)
-<<<<<<< HEAD
 			return (1);
 		if(opcao == 2)
 			return (0);
-=======
 			return 1;
 		if(opcao == 2)
 			return 0;
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 		else
 			printf("Selecione uma opcao valida");
 	}while (opcao < 1 || opcao > 2);
@@ -132,39 +122,24 @@ void mostrarPreco(int preco_item){
 }
 
 item menuInserirItem(){
-<<<<<<< HEAD
 	item novo_item, achou;
-=======
-	item novo_item;
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 	do{
 		printf("Insira a categoria do novo item: ");
 		scanf(" %[^\n]s",&novo_item.categoria);
 		getchar();
 		if(novo_item.categoria < 0)
 			printf("Insira uma categoria valida");
-<<<<<<< HEAD
 	} while(novo_item.categoria < 0);
 	do{
 		printf("Insira o codigo do novo item: ");
-=======
-	}
-	while(novo_item.categoria < 0);
-	do{
-	printf("Insira o codigo do novo item: ");
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 		scanf("%d",&novo_item.codigo);
 		getchar();
 		achou = pesquisaListaItens(novo_item.codigo);
 		if (achou){
 			printf("Voce precisa inserir um codigo unico (que nao seja de nenhum dos outros produtos");
 		}
-<<<<<<< HEAD
 	} while (achou);
-=======
-	}
-	while (achou);
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
+
 	do{
 		printf("Insira o preco do novo item (maximo de 5000 reais):");
 		scanf("%f",&novo_item.preco);
@@ -176,32 +151,20 @@ item menuInserirItem(){
 	do{
 		printf("Insira a quantidade do item que você deseja: ");
 		scanf("%d", &novo_item.quantidade);
-	}
-	while(novo_item.quantidade < 0);
+	} while(novo_item.quantidade < 0);
 	getchar();
 	return(novo_item);
 }
 
-<<<<<<< HEAD
-menuAlterarUsuario(usuario **plista_usuarios, usuario **p_usuario_atual){
-	int achou, opcao;
-	char cpf[11];
-=======
-menuAlterarUsuario(usuario *plista_usuarios, usuario **p_usuario_atual){
+int menuAlterarUsuario(usuario **plista_usuarios, usuario **p_usuario_atual){
 	int achou, opcao;
 	char cpf[11];
 
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 	do{
 		mostrarListaUsuarios(&plista_usuarios);
 		printf("Digite o CPF do usuario que voce deseja alterar: ");
 		scanf(" %[^\n]s",cpf);
 		getchar();
-<<<<<<< HEAD
-		achou = pesquisaListaUsuarios(cpf);
-=======
-		achou = pesquisaListaUsuarios(&cpf);
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 		if (!achou){
 			printf("Insira um CPF de um usuario valido");
 		}
@@ -218,31 +181,19 @@ menuAlterarUsuario(usuario *plista_usuarios, usuario **p_usuario_atual){
 	return(opcao);
 }
 
-<<<<<<< HEAD
 int menuAlterarProduto(){
 	int opcao;
 	do{
-		printf("\nSelecione o que voce deseja fazer com os itens.\n1. Inserir novo item\n2.Alterar preco de item existente\n3.Alterar descricao de item\n4. Quantidade de um item no estoque\n5. Sair\n\nSelecione a opcao: ");
-=======
-menuAlterarProduto(){
-	int opcao;
-	do{
 		printf("\nSelecione o que voce deseja fazer com os itens.\n1. Inserir novo item\n2.Alterar preco de item existente\n3.Alterar descricao de item\n4. Quantidade de itens no estoque\n5. Sair\n\nSelecione a opcao: ");
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 		scanf("%d",opcao);
 		if (opcao < 1 || opcao > 5)
 			printf("Insira uma opcao valida\n")
 
-	}
-	while(opcao < 1 || opcao > 5);
+	} while(opcao < 1 || opcao > 5);
 	return (opcao);
 }
 
-<<<<<<< HEAD
 int menuEstadoPedido(usuario **p_usuario_atual, pedido **pedido_usuario_atual){
-=======
-menuEstadoPedido(usuario **p_usuario_atual, pedido **pedido_usuario_atual){
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 	int cod_pedido, achou;
 	do{
 		mostrarListaPedidos(&p_usuario_atual);
@@ -257,12 +208,10 @@ menuEstadoPedido(usuario **p_usuario_atual, pedido **pedido_usuario_atual){
 	return(cod_pedido);
 }
 
-<<<<<<< HEAD
 /*
  * REVER ESSA FUNÇÃO
  */
-=======
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
+
 void menuInserirPedido(pedido **pedido_novo){
 	int precoItens=0, qtdItens, i, itensPedido[30];
 
@@ -271,14 +220,9 @@ void menuInserirPedido(pedido **pedido_novo){
 		do{
 			printf("Selecione a quantidade de itens que você deseja adicionar o pedido (maximo de 30): ");
 			scanf("%d",&qtdItens);
-<<<<<<< HEAD
 			if (qtdItens > 30 || qtdItens<1)
-=======
-			if (qtdItens > 30 || qtdItens<1) 
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 				printf("\nInsira uma quantidade valida de itens");
-		}
-		while (qtdItens < 30 && qtdItens > 1);
+		} while (qtdItens < 30 && qtdItens > 1);
 		for(i=0;i<(qtdItens-1);i++){
 			printf("Entre com o codigo do %do produto que voce deseja\n", (i+1));
 			scanf("%d",&itensPedido[i]);
@@ -289,11 +233,7 @@ void menuInserirPedido(pedido **pedido_novo){
 			printf("Atencao, seus pedidos excederam o valor maximo de 2500 reais, selecione novamente a quantidade de itens que voce deseja adicionar\n");
 	}
 	while(precoItens > 2500);
-<<<<<<< HEAD
-}
-=======
 } 
->>>>>>> f9a34bc86b9521bcf660083965883c4724dfc454
 /*Terminar!*/
 
 void mostrarEstadoPedido(int estado_pedido){
