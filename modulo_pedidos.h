@@ -39,5 +39,5 @@ typedef struct estrutura_pedido{
 void alterarEstadoPedido (int processar, **posicao_pedido);
 void insereListaPedidos (/*rever parametros */);
 int consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
-
+float consultarPrecoItem ( int codigo_item);
 
