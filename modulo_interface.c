@@ -86,7 +86,7 @@ int menuItem() {
 	do{
 		printf("Insira o codigo do item que você deseja");
 		scanf("%d",cod_item);
-		achou = procuraListaItens(cod_item); /*estara na modulo_itens*/
+		achou = procuraListaItens(cod_item); /*estara na modulo_itens_modifiquei pro padrao*/
 		if (!achou){
 			printf("O item que voce selecionou não existe. Deseja fazer nova consulta?\n1. Sim\n2. Não\n\nInsira sua opção: ");
 			scanf("%d", &opcao);
