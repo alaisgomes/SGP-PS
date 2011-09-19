@@ -8,7 +8,7 @@
 int main(){
 
 	pedido *p_pedido;
-	usuario *p_usuario;
+	usuario *plista_usuarios;
 	item *p_item;
 	itens_pedido *p_itens_pedido;
 

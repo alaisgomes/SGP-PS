@@ -9,27 +9,13 @@
 /*#######################################################*/
 
 typedef struct estrutura_usuario{
-
-	int CPF;		/*Variável responsável por identificar o usuário de maneira
-	 	 	 	 	 única*/
-	int tipo_acesso;/*Variável responsável por informar quais os privilégios
-					 de acesso determinado usuário possui.*/
-	int senha[5];	/*Variável responsável por armazenar a senha de acesso do
-	 	 	 	 	 usuário.*/
+	char CPF[11];
+	int tipo_acesso;
+	char senha[6];
 	char nome[50];
 
-	/*----------------------------------------------------*/
-	/*Para o armazenamento dos usuários deverá ser utilizada uma lista encadeada
-	 * simples.*/
-
-	struct estrutura_usuario *proximo_usuario; /*Variável que aponta para a próxima
-	 	 	 	 	 struct "usuário" da lista.*/
-
-	/*----------------------------------------------------*/
-	/*Cada usuário possuirá uma lista de pedidos.*/
-
-	pedido *pedidos;	/*Variável para armazenar a lista de pedidos que o usuário possui.*/
-
+	struct estrutura_usuario *prox_usuario;
+	pedido *pedidos; /*sublista de cada usuario com seus pedidos */
 
 }usuario;
 
@@ -37,16 +23,17 @@ void alterarCPF (char *novo_cpf, usuario **p_usuario_atual);
 void alterarNome (char *novo_nome, usuario **p_usuario_atual);
 void alterarSenha (char *novo_senha, usuario **p_usuario_atual);
 
-void apontaListaUsuarios (usuario **p_usuario);
+void apontaListaUsuarios (usuario **p_usuario, char **cpf);
 void insereListaUsuarios(usuario *cadastro_usuario);
-int pesquisaListaUsuarios (char **cpf); /*retorna se o usuario existe ou nao */
+int pesquisaListaUsuarios (char *cpf); /*retorna se o usuario existe ou nao */
+void mostrarListaUsuarios (usuario **plista_usuarios);
 
 int verificaTipoUsuario (usuario **atual);
 
 
 int procurarSenhaUsuarios (char *senha); /*retorna se a seha existe ou nao */
 
-void deletarListaUsuarios (usuario *p_usurio_atual, usuario *plista_usuario); /*deleta usuario da lista de usuarios */
+void deletarListaUsuarios (usuario *p_usurio_atual); /*deleta usuario da lista de usuarios */
 
 int tarefaUsuarios (int tipo_usuario, usuario *posicao_usuario);
 
@@ -54,6 +41,5 @@ int FazerLogin (char *cpf,  char *nome, char *senha); /*retorna o tipo do usuari
 
 void cadastrarUsuario ();
 
-void mostraListaUsuarios (usuario *plista_usuarios);
 
 
