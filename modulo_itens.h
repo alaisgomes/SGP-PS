@@ -16,6 +16,7 @@ typedef struct estrutura_item{
 	struct estrutura_item *prox_item;
 
 }item;
+
 float consultarPrecoItem (int codigo_item);
 void alterarPrecoItem (int novo_preco, item **p_item);
 void alterarQtdItem (int nova_quantidade, item **p_item);
