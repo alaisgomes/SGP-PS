@@ -23,6 +23,6 @@ void alterarQtdItem (int nova_quantidade, item **p_item);
 void alterarDescricaoitem (char *nova_descricao, item **p_item);
 
 void insereListaItens (item novo_item);
-void apontaListaItens (item codigo_item, item **pitem);
+void apontaListaItens (int codigo_item, item **pitem);
 int procuraListaItens(int cod_item);
 void mostrarListaItens (item **plista_itens);
