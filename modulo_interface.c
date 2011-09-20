@@ -309,7 +309,11 @@ void menuAlterarDescricao(char **nova_descricao){
 
 int menuAlterarQuantidade(){
 	int qtd;
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> f4401ebcc2f090615bd281eb07822bee3434983a
 	do{
 		printf("Insira a quantidade: ");
 		scanf("%d",&qtd);
@@ -320,9 +324,14 @@ int menuAlterarQuantidade(){
 	return (qtd);
 }
 
+<<<<<<< HEAD
 int processarPedido (usuario **posicao_usuario, int **cod_pedido){
 	mostraListaPedidos(&posicao_usuario);
 	int opcao;
+=======
+void processarPedido (usuario **posicao_usuario, int **cod_pedido){
+	mostraListaPedidos(&posicao_usuario);
+>>>>>>> f4401ebcc2f090615bd281eb07822bee3434983a
 	do{
 		printf("Insira o codigo do produto que voce deseja processar o pedido: ");
 		scanf("%d",&cod_pedido);
@@ -339,7 +348,11 @@ int processarPedido (usuario **posicao_usuario, int **cod_pedido){
 		if (opcao == 2){
 			return 0;
 		}
+<<<<<<< HEAD
 		else
+=======
+		else 
+>>>>>>> f4401ebcc2f090615bd281eb07822bee3434983a
 			printf("Favor digitar 1 ou 2!");
 		}
 	while (opcao != 1 || opcao != 2);
