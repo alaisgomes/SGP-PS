@@ -11,7 +11,7 @@ typedef struct estrutura_itens_pedido{
 
 	item *item;
 	int quantidade;
-
+	char data_entrada [10];
 	struct estrutura_itens_pedido *proximo;
 
 }itens_pedido;
@@ -41,3 +41,8 @@ void insereListaPedidos (/*rever parametros */);
 int consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
 float consultarPrecoItem ( int codigo_item);
 
+
+void insereListaItensPedidos(itens_pedido **p_itens_pedido, int codigo_item, int quantidade, char *data);
+/*vai passar o ponteiro do pedido atual (que ele ta criando na funcao) e vai passar o item e a quantidade e essa funcao
+ * vai atualizar o pedido achando o item pelo codigo e atualizando o ponteiro
+ */

@@ -101,16 +101,14 @@ int menuItem(){
 }
 
 int funcaoContinuar(){
+
 	int opcao;
 	do{
 		printf("Deseja continuar realizando a operacao atual?n1. Sim\n2. Não\n\nInsira sua opção: ");
 		scanf("%d",&opcao);
 		if(opcao == 1)
 			return (1);
-		if(opcao == 2)
-			return (0);
-			return 1;
-		if(opcao == 2)
+		else if(opcao == 2)
 			return 0;
 		else
 			printf("Selecione uma opcao valida");
@@ -212,29 +210,38 @@ int menuEstadoPedido(usuario **p_usuario_atual, pedido **pedido_usuario_atual){
  * REVER ESSA FUNÇÃO
  */
 
-void menuInserirPedido(pedido **pedido_novo){
-	int precoItens=0, qtdItens, i, itensPedido[30];
-
+float menuInserirPedido(itens_pedido **pedido_atual){
+	int precoItens=0, qtdItens, codigo_item, cont=0, continuar;
+	char data[10];
 	mostrarListaDeItens();
 	do{
-		do{
-			printf("Selecione a quantidade de itens que você deseja adicionar o pedido (maximo de 30): ");
-			scanf("%d",&qtdItens);
-			if (qtdItens > 30 || qtdItens<1)
-				printf("\nInsira uma quantidade valida de itens");
-		} while (qtdItens < 30 && qtdItens > 1);
-		for(i=0;i<(qtdItens-1);i++){
-			printf("Entre com o codigo do %do produto que voce deseja\n", (i+1));
-			scanf("%d",&itensPedido[i]);
-			precoItens = precoItens + consultarPrecoItem(itensPedido[i]);
-			getchar();
-		}
-		if (precoItens > 2500)
-			printf("Atencao, seus pedidos excederam o valor maximo de 2500 reais, selecione novamente a quantidade de itens que voce deseja adicionar\n");
-	}
-	while(precoItens > 2500);
+		cont++;
+		if (cont>30)
+			printf ("ATENCAO: nao eh possivel adidionar mais itens a esse pedido. Caso queira adicionar mais itens, faca  um novo pedido\n")
+
+		printf ("Digite o codigo do item a ser inserido no pedido: ");
+		scanf ("%d", &codigo_item);
+		printf ("Qual a quantidade desse item voce deseja pedir? ");
+		scanf ("%d",&qtdItens);
+		printf ("Entre com a data de hoje: (dd/mm/aaaa)  exemplo: 11/03/1990\n")
+		getchar();
+		scanf ("%s", data);
+		precoItens = precoItens + consultarPrecoItem (codigo_item);
+		if (precoItens > 25000) {
+			printf("ATENCAO: seu pedido excedeu o preco maximo de 2500 reais. O ultimo sera retirado.\nCaso deseja pedir outros itens, fazer um novo pedido\n");
+			precoItens = precoItens - consultarPrecoItem (codigo_item);
+		} else
+		insereListaItensPedidos (&pedido_atual, codigo_item, qtdItens, &data);
+		/*
+		 * a cada chamada dessa funcao, vai ter um novo item de pedido prra esse pedido contendo apenas:
+		 * ponteiro pro item requerido e a quantidade desse item requerida, saca?
+		 * dai quando retornar pra mim, eu vou inserir esse pedido na lista de pedidos do usuario :P
+		 */
+		continuar = fucaoContinuar ();
+	} while((precoItens <= 25000)&&(continuar==1)&&(cont<=30));
+	return precoItens;
 } 
-/*Terminar!*/
+
 
 void mostrarEstadoPedido(int estado_pedido){
 	if (estado_pedido)
@@ -280,4 +287,60 @@ int ComecarLogin(){
 		}
 	}
 	while (deslogar == 0);
+}
+
+float menuAlterarPreco (){
+	float preco;
+	do{
+		printf("Insira o preco: ");
+		scanf("%f",&preco);
+		if (preco > 5000 || preco < 0)
+			printf("Atencao: Insira um preco valido.");
+	}
+	while (preco > 5000 || preco < 0);
+	return (preco);
+
+}
+
+void menuAlterarDescricao(char **nova_descricao){
+	printf("Insira a nova descircao");
+	scanf(" %[^\n]s",nova_descricao);
+}
+
+int menuAlterarQuantidade(){
+	int qtd;
+
+	do{
+		printf("Insira a quantidade: ");
+		scanf("%d",&qtd);
+		if(qtd < 0)
+			printf("A quantidade tem de ser maior que zero!");
+	}
+	while(qtd < 0);
+	return (qtd);
+}
+
+int processarPedido (usuario **posicao_usuario, int **cod_pedido){
+	mostraListaPedidos(&posicao_usuario);
+	int opcao;
+	do{
+		printf("Insira o codigo do produto que voce deseja processar o pedido: ");
+		scanf("%d",&cod_pedido);
+		if (cod_pedido < 0)
+			printf("Insira um codigo valido");
+		}
+	while (cod_pedido < 0);
+	do{
+		printf("Voce deseja realmente processar esse pedido? Digite\n1. para Sim\n2 para Nao\n\nInsira sua opcao: ");
+		scanf("%d",&opcao);
+		if (opcao == 1){
+			return 1;
+		}
+		if (opcao == 2){
+			return 0;
+		}
+		else
+			printf("Favor digitar 1 ou 2!");
+		}
+	while (opcao != 1 || opcao != 2);
 }

@@ -136,11 +136,11 @@ void deletarListaUsuarios (usuario **p_usuario_atual) {
 }
 /*FUNCAO PARA USUARIO REALLIZAR SUAS ATIVIDADES */
 int tarefaUsuarios (int tipo_usuario, usuario **posicao_usuario) {
-
+	itens_pedido *p_itens_pedido;
 	int operacao, codigo_item, continuar, numero_pedido, estado_pedido, codigo_item, tipoAlteracao;
 	int pedido_novo[60], nova_quantidade;
 	item novo_item, *p_item;
-	float preco_item, novo_preco;
+	float preco_item, novo_preco, preco_total_pedido;
 	usuario *p_usuario_atual;
 	char novo_cpf[12], novo_nome[50], nova_senha[6], nova_descricao[50];
 
@@ -161,8 +161,8 @@ int tarefaUsuarios (int tipo_usuario, usuario **posicao_usuario) {
 					break;
 					case 2: /*fazer um pedido REVER*/
 						do {
-							/*menuInserirPedido (&novo_pedido);*/
-							/*inserirPedido (lista de itens aserem inseridos no pedido , ponteiro do usuario para insetir os pedidos); */
+							preco_total_pedido = menuInserirPedido(&p_itens_pedido);
+							inserirPedido (&p_itens_pedido, preco_total_pedido); /*passo o ponteiro do pedido pra adicionar ele e seu valor total */
 							continuar = funcaoContinuar ();
 
 						} while (continuar ==1);
@@ -196,8 +196,8 @@ int tarefaUsuarios (int tipo_usuario, usuario **posicao_usuario) {
 				break;
 				case 2: /*fazer um pedido REVER*/
 					do {
-						/*menuInserirPedido (&novo_pedido); */
-						/*inserirPedido (lista de itens aserem inseridos no pedido, ponteiro do usuario para insetir os pedidos); */
+						preco_total_pedido = menuInserirPedido(&p_itens_pedido);
+						inserirPedido (&p_itens_pedido, preco_total_pedido); /*passo o ponteiro do pedido pra adicionar ele e seu valor total */
 						continuar = funcaoContinuar ();
 
 					} while (continuar ==1);
@@ -205,8 +205,8 @@ int tarefaUsuarios (int tipo_usuario, usuario **posicao_usuario) {
 
 				case:3 /*consultar estado pedido*/
 					do {
-						numero_pedido = menuEstadoPedido (usuario **p_usuario_atual, pedido **pedido_usuario_atual);
-						estado_pedido = consultarEstadoPedido (/*ponteiro usuario*/, /*ponteiro do pedido*/, numero_pedido);
+						numero_pedido = menuEstadoPedido (&posicao_usuario, &pedido_usuario_atual);
+						estado_pedido = consultarEstadoPedido (posicao_usuario,pedido_usuario_atual, numero_pedido);
 						mostrarEstadoPedido (estado_pedido);
 						continuar = funcaoContinuar ();
 					} while (continuar ==1);
