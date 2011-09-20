@@ -43,3 +43,5 @@ void menuAlterarDescricao (char **nova_descricao);
  /*chama a funcao mostraListaPedidos passando o ponteiro do usuario e pede pro usuario digitar o cod do pedido a ser alterado
   * dai você pergunta se ele quer ou nao processar o pedido e retorna 1 para sim e 0 para nao!
   */
+
+ float menuInserirPedido(itens_pedido **pedido_atual);

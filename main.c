@@ -9,7 +9,7 @@ int main(){
 
 	pedido *p_pedido;
 	usuario *plista_usuarios;
-	item *p_item;
+	item *plista_itens;
 	itens_pedido *p_itens_pedido;
 
 	/*p_pedido = malloc(sizeof(pedido));
