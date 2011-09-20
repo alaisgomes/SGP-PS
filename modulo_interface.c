@@ -281,3 +281,58 @@ int ComecarLogin(){
 	}
 	while (deslogar == 0);
 }
+
+float menuAlterarPreco (){
+	float preco;
+	do{
+		printf("Insira o preco: ");
+		scanf("%f",&preco);
+		if (preco > 5000 || preco < 0)
+			printf("Atencao: Insira um preco valido.");
+	}
+	while (preco > 5000 || preco < 0);
+	return (preco);
+
+}
+
+void menuAlterarDescricao(char **nova_descricao){
+	printf("Insira a nova descircao");
+	scanf(" %[^\n]s",nova_descricao);
+}
+
+int menuAlterarQuantidade(){
+	int qtd;
+	
+	do{
+		printf("Insira a quantidade: ");
+		scanf("%d",&qtd);
+		if(qtd < 0)
+			printf("A quantidade tem de ser maior que zero!");
+	}
+	while(qtd < 0);
+	return (qtd);
+}
+
+void processarPedido (usuario **posicao_usuario, int **cod_pedido){
+	mostraListaPedidos(&posicao_usuario);
+	do{
+		printf("Insira o codigo do produto que voce deseja processar o pedido: ");
+		scanf("%d",&cod_pedido);
+		if (cod_pedido < 0)
+			printf("Insira um codigo valido");
+		}
+	while (cod_pedido < 0);
+	do{
+		printf("Voce deseja realmente processar esse pedido? Digite\n1. para Sim\n2 para Nao\n\nInsira sua opcao: ");
+		scanf("%d",&opcao);
+		if (opcao == 1){
+			return 1;
+		}
+		if (opcao == 2){
+			return 0;
+		}
+		else 
+			printf("Favor digitar 1 ou 2!");
+		}
+	while (opcao != 1 || opcao != 2);
+}
